@@ -103,63 +103,6 @@
         }
     }
 
-    void DFS(Graph *G, vertex v){
-        printf("visited %d\n",v);
-        for(int i = 0; i < G->V;i++){
-            if(G->adj[i][v].w == 1 ){
-                G->adj[i][v].visited = true;
-            }
-        }
-        for(int j = 0; j < G->V; j++){
-            if(G->adj[v][j].w == 1 && G->adj[v][j].visited == false){
-                G->adj[v][j].visited = true;
-                DFS(G,j);
-            }
-        }
-
-    }
-
-    void initDFS(Graph *G, vertex v){
-        clear_visited(G);
-        printf("DFS\n");
-        DFS(G,v);
-    }
-
-    void BFS(Graph *G, vertex v){
-        int first_one = 0, last_one = 0;
-        int *queue = new int[G->V];
-        queue[last_one] = v;
-        last_one++;
-
-        while(last_one != first_one){
-            vertex current = queue[first_one];
-            first_one++;
-            printf("visited %d\n", current);
-            for(int i = 0; i < G->V; i++){
-                if(G->adj[current][i].w == 1 && G->adj[current][i].visited == false){
-                    G->adj[current][i].visited = true;
-                    
-                    for(int j = i; j < G->V; j++){
-                        if(G->adj[j][current].w == 1 && G->adj[j][current].visited == false){
-                            if(j!=queue[first_one]){
-                                queue[last_one] = j;
-                                last_one++;
-                                G->adj[j][current].visited = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        free(queue);
-    }
-
-    void initBFS(Graph *G, vertex v){
-        clear_visited(G);
-        printf("BFS\n");
-        BFS(G,v);
-    }
-
 static void print_path(vertex* parent, int n){
     if(parent[n]==-1){
         printf("%d",n);
