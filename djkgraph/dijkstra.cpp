@@ -24,7 +24,7 @@
         
         return matrix;
     }
-
+    
     Graph *graph_init(int n){
         Graph *G = new Graph;
 
